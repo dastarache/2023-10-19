@@ -37,6 +37,17 @@ function conteo_de_personas(){//nombre de la funcion
 }
 
 
+}
+
+
+function borrar_persona($id){//nombre de la funcion
+    $conexion=mysqli_connect('localhost','root','root','nueva');//conexion
+    $sql="delete from usuario where id_usuario=$id;";//consulta de bases de datos
+    $r=$conexion->query($sql);//ejecuta la consulta
+    $salida=mysqli_affected_rows($conexion);//se utliza para ver el numero de filas afectadas
+    mysqli_close($conexion);//cerrado de la consulta
+    return $salida;//retorna la operacion
+}
 
 
 
