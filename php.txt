@@ -1,0 +1,104 @@
+<?php 
+    function consulta(){
+        $salida=0;//inicializa la varible 
+         $conexion=mysqli_connect('localhost','root','root','nueva' );//crea conexion a la base de datos 
+         $sql="select 2+1";
+               $sql.=" as suma";// concatena con el sql de arriba para ahorrar espacio
+               $r=$conexion->query($sql);//ejecuta una consulta
+         //recorre el recordset
+         while($fila=mysqli_fetch_assoc($r)){
+            // inch o acumula 
+            $salida+=$fila['suma'];
+         }
+           mysqli_close($conexion);
+         return $salida;// retorna la operacion 
+
+         }
+
+         function calculo_v2(){
+             $conexion=mysqli_connect('localhost','root','root','nueva' );
+            $sql="select 10 as n1,";
+            $sql.= " 20 as n2 ";
+            $r=$conexion->query($sql);//ejecuta una consulta
+         //recorre el recordset
+          while($fila=mysqli_fetch_assoc($r)){
+            // inch o acumula 
+            $salida=$fila['n1'];
+            $salida.=$fila['n2'];
+         }
+           mysqli_close($conexion);
+         return $salida;// retorna la operacion 
+
+
+         }
+function conteo_de_personas(){//nombre de la funcion
+    $conexion=mysqli_connect('localhost','root','root','nueva');//conexion
+    $sql="select count(*) as conteo from usuario;";//consulta a la base de datos
+    $r=$conexion->query($sql);//ejecuta la consulta
+    while($fila=mysqli_fetch_assoc($r)){//recorre el recordset
+        $salida=$fila['conteo'];//inicia o acumula 
+    }
+    mysqli_close($conexion);//cerrado de la conexion
+    return $salida;//retorna la operacion 
+}
+
+
+  function insertar_personas(){//nombre de la funcion
+    $conexion=mysqli_connect('localhost','root','root','nueva');//conexion
+    $sql="insert into usuario(id_usuario, nombre, contraseña) values( '7', 'maria mendez', '2020' );";//consulta a la base de datos
+    $r=$conexion->query($sql);//ejecuta la consulta
+    $salida=mysqli_affected_rows($conexion);//afeca a la conexion para que deje ingresar los datos
+    mysqli_close($conexion);//cerrado de la conexion
+    return $salida;//retorna la operacion 
+}
+
+
+function borrar_persona($id){//nombre de la funcion
+    $conexion=mysqli_connect('localhost','root','root','nueva');//conexion
+    $sql="delete from usuario where id_usuario=$id;";//consulta de bases de datos
+    $r=$conexion->query($sql);//ejecuta la consulta
+    $salida=mysqli_affected_rows($conexion);//se utliza para ver el numero de filas afectadas
+    mysqli_close($conexion);//cerrado de la consulta
+    return $salida;//retorna la operacion
+}
+
+function actualizarSitio($sitio, $id_usuario = null){
+    $salida = ""; //se inicializa la salida 
+    $conexion = mysqli_connect('localhost','root','root','nueva'); //conexion a la base de datos.
+    $sql  = "UPDATE usuario SET sitio = '$sitio' WHERE id_usuario  = '$id_usuario'"; //inicio de la funcion
+    //echo $sql;
+    $resultado = $conexion->query($sql);//ejecuta la consulta.
+    //recome el recorset 
+    if($resultado)//si a sucedio algun cambio en la base 
+    {
+        $salida .= "Se ha actualizado el registro correctamente";//mensaje si se registro de manera correcta
+    }else{
+        $salida .= "Error: 502";//mensaje en caso dee erro 
+    }
+        $conexion->close(); //para terminar la conexion con la base de datos
+    return $salida ;  //retorna 
+}
+function ver_sitio() {
+  $salida='';
+  $conexion = mysqli_connect('localhost','root','root','nueva');
+  $sql = "SELECT sitio as sitio FROM usuario";
+  $r = $conexion->query($sql);
+  $salida = "";
+  while ($fila = mysqli_fetch_assoc($r)) {
+    $salida .= "<a href='".$fila['sitio']."'>";
+    $salida .= "Ve a mi sitio";
+    $salida .= "</a>";
+  }
+  return $salida;
+}
+
+
+?>
+---------------------------------------------------------------
+<?php  
+// se incluye el archivo funciones 
+include("funciones.php");
+// se invoca la funcion de consulta 
+echo ver_sitio('4');
+
+?>

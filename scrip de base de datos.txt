@@ -1,0 +1,4 @@
+create database nueva;
+use nueva;
+select 2+1 as suma;
+select 10 as n1, 20 as n2 ;
