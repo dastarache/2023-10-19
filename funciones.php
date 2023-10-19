@@ -15,9 +15,6 @@
 
          }
 
-?>
-
-
 function conteo_de_personas(){//nombre de la funcion
     $conexion=mysqli_connect('localhost','root','root','nueva');//conexion
     $sql="select count(*) from usuario;";//consulta a la base de datos
@@ -27,6 +24,27 @@ function conteo_de_personas(){//nombre de la funcion
     }
     mysqli_close($conexion);//cerrado de la conexion
     return $salida;
+}
+
+
+  function insertar_personas(){//nombre de la funcion
+    $conexion=mysqli_connect('localhost','root','root','nueva');//conexion
+    $sql="insert into usuario(id_usuario, nombre, contraseña) values( '7', 'maria mendez', '2020' );";//consulta a la base de datos
+    $r=$conexion->query($sql);//ejecuta la consulta
+    $salida=mysqli_affected_rows($conexion);//afeca a la conexion para que deje ingresar los datos
+    mysqli_close($conexion);//cerrado de la conexion
+    return $salida;//retorna la operacion 
+}
+
+
+
+
+
+
+?>
+
+
+
 
 
 
