@@ -6,5 +6,12 @@
                $sql.="as suma";// concatena con el sql de arriba para ahorrar espacio
                $r=$conexion->query($sql);//ejecuta una consulta
          return $salida;// retorna la operacion 
-}
+         //recorre el recordset
+         while($fila=mysqli_fetch_assoc($sr)){
+            // inch o acumula 
+            $salida+=$fila['suma'];
+         }
+
+         }
+
 ?>
