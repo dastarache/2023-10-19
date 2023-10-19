@@ -16,3 +16,20 @@
          }
 
 ?>
+
+
+function conteo_de_personas(){//nombre de la funcion
+    $conexion=mysqli_connect('localhost','root','root','nueva');//conexion
+    $sql="select count(*) from usuario;";//consulta a la base de datos
+    $r=$conexion->query($sql);//ejecuta la consulta
+    while($fila=mysqli_fetch_assoc($r)){
+        $salida=$fila['count(*)'];
+    }
+    mysqli_close($conexion);//cerrado de la conexion
+    return $salida;
+
+
+
+
+
+
